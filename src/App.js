@@ -8,15 +8,21 @@ const PHASES = [
       { title: "Prompt Engineering", items: ["Zero-shot, few-shot, chain-of-thought prompting","System prompts and role definition","Structured output (JSON mode)","Prompt chaining and iterative refinement","Anthropic-specific guidance — Constitutional AI"] },
       { title: "API Usage", items: ["REST API concepts — requests, responses, headers, auth","Anthropic API — messages endpoint","Handling rate limits and errors","Streaming responses","Managing conversation history / context windows"] },
       { title: "LangChain", items: ["Chains — basic sequential chains","Prompt templates","Memory — conversation buffer, summary memory","Agents and tools","Document loaders and text splitters"] },
+      { title: "Scripting (Bash & PowerShell)", items: ["Bash — variables, loops, conditionals, functions","File management scripts — copying, moving, archiving","PowerShell — cmdlets, pipelines, scripts","Automation scripts for system tasks","Scheduled tasks and cron job basics"] },
+      { title: "IT Networking", items: ["OSI model and TCP/IP stack","IP addressing, subnetting, CIDR notation","DNS, DHCP, HTTP/HTTPS, SSH protocols","Firewalls, VPNs, network security basics","Network troubleshooting — ping, tracert, nslookup, netstat"] },
+      { title: "CompSci Algorithms & Data Structures", items: ["Big O notation — time and space complexity","Data structures — arrays, linked lists, stacks, queues","Trees and graphs — traversal, BFS, DFS","Sorting algorithms — merge sort, quick sort, binary search","Dynamic programming basics"] },
     ],
   },
   {
     id: "phase2", label: "Phase 2", title: "Backend & Data", months: "Months 3–7", color: "#1e6b4a",
     sections: [
       { title: "Node.js & Express", items: ["JavaScript fundamentals — async/await, promises, modules","Building REST APIs with Express","Middleware, routing, error handling","Authentication — JWT, sessions","Environment variables and secrets management"] },
-      { title: "Databases", items: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes","PostgreSQL — setup, querying, schema design","Supabase — hosted Postgres, auth, row-level security","Data modelling — relational design, normalisation"] },
+      { title: "Databases & SQL", items: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes","Subqueries, CTEs, and window functions","Stored procedures and triggers","Query optimisation and execution plans","Transactions and ACID properties","PostgreSQL — setup, querying, schema design","Supabase — hosted Postgres, auth, row-level security","Data modelling — relational design, normalisation"] },
       { title: "Authentication & Security", items: ["OAuth 2.0 concepts","Supabase Auth or Auth0","Role-based access control (RBAC)","Securing API endpoints"] },
       { title: "Deployment & DevOps", items: ["Docker — containers, images, docker-compose","CI/CD — GitHub Actions","Environment management — dev/staging/prod","Azure cloud basics"] },
+      { title: "Linux & Windows Servers", items: ["Linux command line — navigation, permissions, file management","User and process management, services (systemd)","Windows Server basics — Active Directory, Group Policy","SSH, remote desktop, and server hardening basics","Logs, monitoring, and basic troubleshooting"] },
+      { title: "Developer Tools", items: ["Git advanced — branching strategies, rebasing, stashing","VS Code — extensions, debugging, keyboard shortcuts","Postman / Insomnia for API testing","Browser DevTools — network tab, console, performance","Terminal productivity — aliases, dotfiles, shell customisation"] },
+      { title: "Application Development Skills", items: ["Software design patterns — MVC, repository, factory","SOLID principles","Unit testing, integration testing, TDD basics","Code review practices and standards","API design — RESTful conventions, versioning, documentation"] },
     ],
   },
   {
@@ -43,6 +49,7 @@ const PHASES = [
       { title: "Certifications", items: ["Azure AI Engineer Associate (AI-102)","Azure Developer Associate (AZ-204)","Kaggle — Python, Pandas, ML certs","DeepLearning.AI specialisations"] },
       { title: "Open Source & Community", items: ["Contribute to LangChain or related project","Complete a Kaggle competition","Clean GitHub profile — good READMEs, consistent commits","Attend AI UK or PyData London"] },
       { title: "Interview Preparation", items: ["System design — RAG pipelines, agent systems at scale","LLM questions — RAG vs fine-tuning, hallucination, safety","Python coding — LeetCode easy/medium","Domain Q&A — AI ethics, GDPR, DPIA, bias in policing AI"] },
+      { title: "Project Management", items: ["Agile and Scrum fundamentals — sprints, standups, retros","Kanban methodology and WIP limits","Project scoping — requirements, timelines, risk management","Stakeholder communication and reporting","Tools — Jira, Trello, or GitHub Projects"] },
     ],
   },
 ];
