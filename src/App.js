@@ -4,52 +4,150 @@ const PHASES = [
   {
     id: "phase1", label: "Phase 1", title: "Foundations", months: "Months 1–3", color: "#1a4a7a",
     sections: [
-      { title: "Python", items: ["Data types, variables, loops, conditionals, functions","File I/O, working with JSON, error handling","OOP basics — classes, methods, inheritance","Virtual environments, pip, requirements.txt","📚 Course: Programming for Everybody — Getting Started with Python (Coursera)","📚 Course: Python Data Structures (Coursera)","📚 Course: Using Python to Access Web Data (Coursera)","📚 Course: Using Databases with Python (Coursera)","📚 Course: Capstone — Retrieving, Processing & Visualising Data with Python (Coursera)"] },
-      { title: "Prompt Engineering", items: ["Zero-shot, few-shot, chain-of-thought prompting","System prompts and role definition","Structured output (JSON mode)","Prompt chaining and iterative refinement","Anthropic-specific guidance — Constitutional AI","📚 Course: ChatGPT Prompt Engineering for Developers (DeepLearning.AI — free)","📚 Course: Anthropic Prompt Engineering Interactive Tutorial (Anthropic docs — free)"] },
-      { title: "API Usage", items: ["REST API concepts — requests, responses, headers, auth","Anthropic API — messages endpoint","Handling rate limits and errors","Streaming responses","Managing conversation history / context windows","📚 Course: Building Systems with the ChatGPT API (DeepLearning.AI — free)"] },
-      { title: "LangChain", items: ["Chains — basic sequential chains","Prompt templates","Memory — conversation buffer, summary memory","Agents and tools","Document loaders and text splitters","📚 Course: LangChain for LLM Application Development (DeepLearning.AI — free)","📚 Course: LangChain: Chat with Your Data (DeepLearning.AI — free)"] },
-      { title: "Scripting (Bash & PowerShell)", items: ["Bash — variables, loops, conditionals, functions","File management scripts — copying, moving, archiving","PowerShell — cmdlets, pipelines, scripts","Automation scripts for system tasks","Scheduled tasks and cron job basics","📚 Course: The Linux Command Line Bootcamp (Udemy — Colt Steele)","📚 Course: PowerShell Master Class (Udemy — John Savill)"] },
-      { title: "IT Networking", items: ["OSI model and TCP/IP stack","IP addressing, subnetting, CIDR notation","DNS, DHCP, HTTP/HTTPS, SSH protocols","Firewalls, VPNs, network security basics","Network troubleshooting — ping, tracert, nslookup, netstat","📚 Course: Google IT Support Professional Certificate (Coursera)","📚 Course: Professor Messer's CompTIA Network+ (YouTube — free)"] },
-      { title: "CompSci Algorithms & Data Structures", items: ["Big O notation — time and space complexity","Data structures — arrays, linked lists, stacks, queues","Trees and graphs — traversal, BFS, DFS","Sorting algorithms — merge sort, quick sort, binary search","Dynamic programming basics","📚 Course: CS50: Introduction to Computer Science (Harvard/edX — free)","📚 Course: Algorithms Specialization (Coursera — Stanford)"] },
+      { title: "Python", items: [
+        { label: "📚 Programming for Everybody — Getting Started with Python (Coursera)", topics: ["Data types, variables, loops, conditionals, functions", "Virtual environments, pip, requirements.txt"] },
+        { label: "📚 Python Data Structures (Coursera)", topics: ["OOP basics — classes, methods, inheritance"] },
+        { label: "📚 Using Python to Access Web Data (Coursera)", topics: ["File I/O, working with JSON, error handling"] },
+        { label: "📚 Using Databases with Python (Coursera)", topics: [] },
+        { label: "📚 Capstone — Retrieving, Processing & Visualising Data with Python (Coursera)", topics: [] },
+      ]},
+      { title: "VS Code", items: [
+        { label: "📚 Visual Studio Code Crash Course (freeCodeCamp — YouTube, free)", topics: ["Interface and navigation — explorer, editor groups, command palette", "Extensions — Python, Pylance, GitLens, GitHub Copilot setup", "Integrated terminal and Git integration", "Debugging — breakpoints, watch variables, debug console", "Keyboard shortcuts and workspace productivity tips"] },
+      ]},
+      { title: "Prompt Engineering", items: [
+        { label: "📚 ChatGPT Prompt Engineering for Developers (DeepLearning.AI — free)", topics: ["Zero-shot, few-shot, chain-of-thought prompting", "System prompts and role definition", "Structured output (JSON mode)", "Prompt chaining and iterative refinement"] },
+        { label: "📚 Anthropic Prompt Engineering Interactive Tutorial (Anthropic docs — free)", topics: ["Anthropic-specific guidance — Constitutional AI"] },
+      ]},
+      { title: "API Usage", items: [
+        { label: "📚 Building Systems with the ChatGPT API (DeepLearning.AI — free)", topics: ["REST API concepts — requests, responses, headers, auth", "Anthropic API — messages endpoint", "Handling rate limits and errors", "Streaming responses", "Managing conversation history / context windows"] },
+      ]},
+      { title: "LangChain", items: [
+        { label: "📚 LangChain for LLM Application Development (DeepLearning.AI — free)", topics: ["Chains — basic sequential chains", "Prompt templates", "Memory — conversation buffer, summary memory"] },
+        { label: "📚 LangChain: Chat with Your Data (DeepLearning.AI — free)", topics: ["Agents and tools", "Document loaders and text splitters"] },
+      ]},
+      { title: "Scripting (Bash & PowerShell)", items: [
+        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", topics: ["Bash — variables, loops, conditionals, functions", "File management scripts — copying, moving, archiving", "Scheduled tasks and cron job basics"] },
+        { label: "📚 PowerShell Master Class (Udemy — John Savill)", topics: ["PowerShell — cmdlets, pipelines, scripts", "Automation scripts for system tasks"] },
+      ]},
+      { title: "IT Networking", items: [
+        { label: "📚 Google IT Support Professional Certificate (Coursera)", topics: ["OSI model and TCP/IP stack", "IP addressing, subnetting, CIDR notation", "DNS, DHCP, HTTP/HTTPS, SSH protocols", "Firewalls, VPNs, network security basics"] },
+        { label: "📚 Professor Messer's CompTIA Network+ (YouTube — free)", topics: ["Network troubleshooting — ping, tracert, nslookup, netstat"] },
+      ]},
+      { title: "CompSci Algorithms & Data Structures", items: [
+        { label: "📚 CS50: Introduction to Computer Science (Harvard/edX — free)", topics: ["Big O notation — time and space complexity", "Data structures — arrays, linked lists, stacks, queues", "Sorting algorithms — merge sort, quick sort, binary search"] },
+        { label: "📚 Algorithms Specialization (Coursera — Stanford)", topics: ["Trees and graphs — traversal, BFS, DFS", "Dynamic programming basics"] },
+      ]},
     ],
   },
   {
-    id: "phase2", label: "Phase 2", title: "Backend & Data", months: "Months 3–7", color: "#1e6b4a",
+    id: "phase2", label: "Phase 2", title: "Backend & Data", months: "Months 3–6", color: "#1e6b4a",
     sections: [
-      { title: "Node.js & Express", items: ["JavaScript fundamentals — async/await, promises, modules","Building REST APIs with Express","Middleware, routing, error handling","Authentication — JWT, sessions","Environment variables and secrets management","📚 Course: The Complete Node.js Developer Course (Udemy — Andrew Mead)"] },
-      { title: "Databases & SQL", items: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes","Subqueries, CTEs, and window functions","Stored procedures and triggers","Query optimisation and execution plans","Transactions and ACID properties","PostgreSQL — setup, querying, schema design","Supabase — hosted Postgres, auth, row-level security","Data modelling — relational design, normalisation","📚 Course: The Complete SQL Bootcamp (Udemy — Jose Portilla)","📚 Course: PostgreSQL for Everybody (Coursera — Dr. Chuck)"] },
-      { title: "Authentication & Security", items: ["OAuth 2.0 concepts","Supabase Auth or Auth0","Role-based access control (RBAC)","Securing API endpoints","📚 Course: Web Application Security — OWASP Top 10 (OWASP.org — free)"] },
-      { title: "Deployment & DevOps", items: ["Docker — containers, images, docker-compose","CI/CD — GitHub Actions","Environment management — dev/staging/prod","Azure cloud basics","📚 Course: Docker & Kubernetes: The Practical Guide (Udemy — Maximilian Schwarzmüller)","📚 Course: GitHub Actions — The Complete Guide (Udemy)"] },
-      { title: "Linux & Windows Servers", items: ["Linux command line — navigation, permissions, file management","User and process management, services (systemd)","Windows Server basics — Active Directory, Group Policy","SSH, remote desktop, and server hardening basics","Logs, monitoring, and basic troubleshooting","📚 Course: The Linux Command Line Bootcamp (Udemy — Colt Steele)","📚 Course: Windows Server Administration (Microsoft Learn — free)"] },
-      { title: "Developer Tools", items: ["Git advanced — branching strategies, rebasing, stashing","VS Code — extensions, debugging, keyboard shortcuts","Postman / Insomnia for API testing","Browser DevTools — network tab, console, performance","Terminal productivity — aliases, dotfiles, shell customisation","📚 Course: Git & GitHub — The Complete Guide (Udemy — Maximilian Schwarzmüller)"] },
-      { title: "Application Development Skills", items: ["Software design patterns — MVC, repository, factory","SOLID principles","Unit testing, integration testing, TDD basics","Code review practices and standards","API design — RESTful conventions, versioning, documentation","📚 Course: Software Design & Architecture Specialization (Coursera — University of Alberta)"] },
+      { title: "Node.js & Express", items: [
+        { label: "📚 The Complete Node.js Developer Course (Udemy — Andrew Mead)", topics: ["JavaScript fundamentals — async/await, promises, modules", "Building REST APIs with Express", "Middleware, routing, error handling", "Authentication — JWT, sessions", "Environment variables and secrets management"] },
+      ]},
+      { title: "Databases & SQL", items: [
+        { label: "📚 The Complete SQL Bootcamp (Udemy — Jose Portilla)", topics: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes", "Subqueries, CTEs, and window functions", "Stored procedures and triggers", "Query optimisation and execution plans", "Transactions and ACID properties"] },
+        { label: "📚 PostgreSQL for Everybody (Coursera — Dr. Chuck)", topics: ["PostgreSQL — setup, querying, schema design", "Supabase — hosted Postgres, auth, row-level security", "Data modelling — relational design, normalisation"] },
+      ]},
+      { title: "Authentication & Security", items: [
+        { label: "📚 Web Application Security — OWASP Top 10 (OWASP.org — free)", topics: ["OAuth 2.0 concepts", "Supabase Auth or Auth0", "Role-based access control (RBAC)", "Securing API endpoints"] },
+      ]},
+      { title: "Deployment & DevOps", items: [
+        { label: "📚 Docker & Kubernetes: The Practical Guide (Udemy — Maximilian Schwarzmüller)", topics: ["Docker — containers, images, docker-compose", "Environment management — dev/staging/prod", "Azure cloud basics"] },
+        { label: "📚 GitHub Actions — The Complete Guide (Udemy)", topics: ["CI/CD — GitHub Actions"] },
+      ]},
+      { title: "Linux & Windows Servers", items: [
+        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", topics: ["Linux command line — navigation, permissions, file management", "User and process management, services (systemd)", "Logs, monitoring, and basic troubleshooting"] },
+        { label: "📚 Windows Server Administration (Microsoft Learn — free)", topics: ["Windows Server basics — Active Directory, Group Policy", "SSH, remote desktop, and server hardening basics"] },
+      ]},
+      { title: "Developer Tools", items: [
+        { label: "📚 Git & GitHub — The Complete Guide (Udemy — Maximilian Schwarzmüller)", topics: ["Git advanced — branching strategies, rebasing, stashing", "VS Code — extensions, debugging, keyboard shortcuts", "Postman / Insomnia for API testing", "Browser DevTools — network tab, console, performance", "Terminal productivity — aliases, dotfiles, shell customisation"] },
+      ]},
+      { title: "Application Development Skills", items: [
+        { label: "📚 Software Design & Architecture Specialization (Coursera — University of Alberta)", topics: ["Software design patterns — MVC, repository, factory", "SOLID principles", "Unit testing, integration testing, TDD basics", "Code review practices and standards", "API design — RESTful conventions, versioning, documentation"] },
+      ]},
     ],
   },
   {
-    id: "phase3", label: "Phase 3", title: "AI Engineering Core", months: "Months 5–10", color: "#6b3a1e",
+    id: "phase3", label: "Phase 3", title: "AI Engineering Core", months: "Months 6–11", color: "#6b3a1e",
     sections: [
-      { title: "RAG — Retrieval Augmented Generation", items: ["Embeddings and vector representations","Vector databases — Pinecone, Chroma, pgvector","Chunking strategies for documents","Retrieval pipelines — similarity search, hybrid search","Build a document Q&A system","📚 Course: Building & Evaluating Advanced RAG (DeepLearning.AI — free)","📚 Course: Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)"] },
-      { title: "Agents & Agentic Systems", items: ["ReAct pattern — reasoning + acting","Tool use / function calling","Multi-step agent workflows","Human-in-the-loop design","LangGraph — agent orchestration","📚 Course: AI Agents in LangGraph (DeepLearning.AI — free)","📚 Course: Multi AI Agent Systems with crewAI (DeepLearning.AI — free)","📚 Course: Agent Memory: Building Memory-Aware Agents (DeepLearning.AI — free)"] },
-      { title: "LLM Ops", items: ["Prompt versioning and management","Evaluation — measuring LLM output quality","Logging and observability — LangSmith","Cost management and token optimisation","Fine-tuning concepts","📚 Course: LLMOps (DeepLearning.AI — free)","📚 Course: Evaluating and Debugging Generative AI (DeepLearning.AI — free)"] },
-      { title: "Structured Outputs & Data Extraction", items: ["Getting reliable JSON from LLMs","Pydantic for output validation","Entity extraction pipelines","End-to-end extraction workflows"] },
+      { title: "RAG — Retrieval Augmented Generation", items: [
+        { label: "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)", topics: ["Embeddings and vector representations", "Vector databases — Pinecone, Chroma, pgvector"] },
+        { label: "📚 Building & Evaluating Advanced RAG (DeepLearning.AI — free)", topics: ["Chunking strategies for documents", "Retrieval pipelines — similarity search, hybrid search", "Build a document Q&A system"] },
+      ]},
+      { title: "Agents & Agentic Systems", items: [
+        { label: "📚 Functions, Tools and Agents with LangChain (DeepLearning.AI — free)", topics: ["Tool use / function calling", "ReAct pattern — reasoning + acting"] },
+        { label: "📚 Safe and Reliable AI via Guardrails (DeepLearning.AI — free)", topics: ["Guardrails and output safety — validation, refusals, content filtering"] },
+        { label: "📚 AI Agents in LangGraph (DeepLearning.AI — free)", topics: ["LangGraph — agent orchestration", "Multi-step agent workflows"] },
+        { label: "📚 Multi AI Agent Systems with crewAI (DeepLearning.AI — free)", topics: ["Human-in-the-loop design"] },
+        { label: "📚 Agent Memory: Building Memory-Aware Agents (DeepLearning.AI — free)", topics: [] },
+      ]},
+      { title: "LLM Ops", items: [
+        { label: "📚 LLMOps (DeepLearning.AI — free)", topics: ["Prompt versioning and management — tracking prompt changes alongside model versions", "Cost management and token optimisation", "Fine-tuning concepts"] },
+        { label: "📚 Evaluating and Debugging Generative AI (DeepLearning.AI — free)", topics: ["Evaluation — measuring LLM output quality", "Logging and observability — LangSmith"] },
+        { label: "📚 LLM Evaluation — Evidently AI (Evidently AI — free)", topics: ["Production monitoring — failure detection, latency alerts, quality regression dashboards"] },
+      ]},
+      { title: "Structured Outputs & Data Extraction", items: [
+        { label: "Getting reliable JSON from LLMs", topics: [] },
+        { label: "Pydantic for output validation", topics: [] },
+        { label: "Entity extraction pipelines", topics: [] },
+        { label: "End-to-end extraction workflows", topics: [] },
+      ]},
     ],
   },
   {
-    id: "phase4", label: "Phase 4", title: "Domain Specialisation", months: "Months 8–14", color: "#5a1e6b",
+    id: "phase4", label: "Phase 4", title: "Domain Specialisation", months: "Months 11–15", color: "#5a1e6b",
     sections: [
-      { title: "Data & Analytics", items: ["Pandas — DataFrames, filtering, grouping, merging","NumPy basics — arrays, numerical operations","Data visualisation — Matplotlib, Plotly","Working with unstructured data — PDFs, emails, documents","📚 Course: Pandas & Data Visualisation (Kaggle Learn — free)","📚 Course: Data Analysis with Python (Coursera — IBM)"] },
-      { title: "Graph & Network Analysis", items: ["Graph theory basics — nodes, edges, paths, centrality","NetworkX — Python graph library","Entity resolution — record linkage, deduplication","Knowledge graphs — Neo4j intro","📚 Course: Applied Social Network Analysis in Python (Coursera — University of Michigan)"] },
-      { title: "Machine Learning Fundamentals", items: ["Supervised vs unsupervised learning","Classification, clustering, anomaly detection","Scikit-learn — end-to-end ML pipelines","Evaluation — precision, recall, F1, ROC curves","📚 Course: Machine Learning Specialization (Coursera — Andrew Ng / DeepLearning.AI)","📚 Course: Intro & Intermediate Machine Learning (Kaggle Learn — free)"] },
-      { title: "Security & Adversarial AI", items: ["Prompt injection attacks and mitigation","AI red-teaming concepts","Bias and fairness in AI systems","EU AI Act, UK regulation, ethics frameworks","📚 Course: Red Teaming LLM Applications (DeepLearning.AI — free)","📚 Course: AI Safety Fundamentals (BlueDot Impact — free)"] },
+      { title: "Data & Analytics", items: [
+        { label: "📚 Pandas & Data Visualisation (Kaggle Learn — free)", topics: ["Pandas — DataFrames, filtering, grouping, merging", "NumPy basics — arrays, numerical operations", "Data visualisation — Matplotlib, Plotly"] },
+        { label: "📚 Data Analysis with Python (Coursera — IBM)", topics: ["Working with unstructured data — PDFs, emails, documents"] },
+      ]},
+      { title: "Graph & Network Analysis", items: [
+        { label: "📚 Applied Social Network Analysis in Python (Coursera — University of Michigan)", topics: ["Graph theory basics — nodes, edges, paths, centrality", "NetworkX — Python graph library", "Entity resolution — record linkage, deduplication", "Knowledge graphs — Neo4j intro"] },
+      ]},
+      { title: "Machine Learning Fundamentals", items: [
+        { label: "📚 Machine Learning Specialization (Coursera — Andrew Ng / DeepLearning.AI)", topics: ["Supervised vs unsupervised learning", "Classification, clustering, anomaly detection", "Evaluation — precision, recall, F1, ROC curves"] },
+        { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", topics: ["Scikit-learn — end-to-end ML pipelines"] },
+      ]},
+      { title: "Security & Adversarial AI", items: [
+        { label: "📚 Red Teaming LLM Applications (DeepLearning.AI — free)", topics: ["Prompt injection attacks and mitigation", "AI red-teaming concepts"] },
+        { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", topics: ["Bias and fairness in AI systems", "EU AI Act, UK regulation, ethics frameworks"] },
+      ]},
+      { title: "Production AI Systems", items: [
+        { label: "📚 Learn Docker (Boot.dev — free to start)", topics: ["Docker for AI deployment — containerising FastAPI + LLM services, docker-compose for local dev"] },
+        { label: "Cost & latency optimisation — token budgeting, batching, async calls", topics: [] },
+        { label: "Caching strategies — semantic caching, prompt caching, response caching", topics: [] },
+        { label: "Streaming responses — SSE, chunked output, progressive UI updates", topics: [] },
+        { label: "Model routing — task-based routing, cost-tier routing, fallback chains", topics: [] },
+      ]},
     ],
   },
   {
-    id: "phase5", label: "Phase 5", title: "Portfolio & Job Readiness", months: "Months 12–18", color: "#1e3d6b",
+    id: "phase5", label: "Phase 5", title: "Portfolio & Job Readiness", months: "Months 15–18", color: "#1e3d6b",
     sections: [
-      { title: "Certifications", items: ["Azure AI Engineer Associate (AI-102)","Azure Developer Associate (AZ-204)","Kaggle — Python, Pandas, ML certs","DeepLearning.AI specialisations","📚 Course: AZ-900 Azure Fundamentals (Microsoft Learn — free)","📚 Course: AI-102 Azure AI Engineer Associate (Microsoft Learn — free)"] },
-      { title: "Open Source & Community", items: ["Contribute to LangChain or related project","Complete a Kaggle competition","Clean GitHub profile — good READMEs, consistent commits","Attend AI UK or PyData London"] },
-      { title: "Interview Preparation", items: ["System design — RAG pipelines, agent systems at scale","LLM questions — RAG vs fine-tuning, hallucination, safety","Python coding — LeetCode easy/medium","Domain Q&A — AI ethics, GDPR, DPIA, bias in policing AI"] },
-      { title: "Project Management", items: ["Agile and Scrum fundamentals — sprints, standups, retros","Kanban methodology and WIP limits","Project scoping — requirements, timelines, risk management","Stakeholder communication and reporting","Tools — Jira, Trello, or GitHub Projects","📚 Course: Google Project Management Certificate (Coursera)","📚 Course: Agile with Atlassian Jira (Coursera — free)"] },
+      { title: "Certifications", items: [
+        { label: "📚 AZ-900 Azure Fundamentals (Microsoft Learn — free)", topics: ["Foundation for Azure AI Engineer and Developer paths"] },
+        { label: "📚 AI-102 Azure AI Engineer Associate (Microsoft Learn — free)", topics: ["Azure AI Engineer Associate (AI-102) certification"] },
+        { label: "Azure Developer Associate (AZ-204)", topics: [] },
+        { label: "📚 Kaggle Certifications (Kaggle Learn — free)", topics: ["Python, Pandas, ML certificates"] },
+        { label: "DeepLearning.AI Specialisation certificates (on completion)", topics: [] },
+      ]},
+      { title: "Open Source & Community", items: [
+        { label: "Contribute to LangChain or related project", topics: [] },
+        { label: "Complete a Kaggle competition", topics: [] },
+        { label: "Clean GitHub profile — good READMEs, consistent commits", topics: [] },
+        { label: "Attend AI UK or PyData London", topics: [] },
+      ]},
+      { title: "Interview Preparation", items: [
+        { label: "System design — RAG pipelines, agent systems at scale", topics: [] },
+        { label: "LLM questions — RAG vs fine-tuning, hallucination, safety", topics: [] },
+        { label: "Python coding — LeetCode easy/medium", topics: [] },
+        { label: "Domain Q&A — AI ethics, GDPR, DPIA, bias in policing AI", topics: [] },
+      ]},
+      { title: "Project Management", items: [
+        { label: "📚 Google Project Management Certificate (Coursera)", topics: ["Agile and Scrum fundamentals — sprints, standups, retros", "Kanban methodology and WIP limits", "Project scoping — requirements, timelines, risk management", "Stakeholder communication and reporting"] },
+        { label: "📚 Agile with Atlassian Jira (Coursera — free)", topics: ["Tools — Jira, Trello, or GitHub Projects"] },
+      ]},
     ],
   },
 ];
@@ -249,10 +347,25 @@ export default function App() {
                             {section.items.map(function(item, i) {
                               var key = phase.id + "-" + section.title + "-" + i;
                               var done = !!checked[key];
+                              var hasTopics = item.topics && item.topics.length > 0;
                               return (
-                                <div key={i} onClick={function() { toggleItem(key); }} style={{ display: "flex", alignItems: "flex-start", gap: 11, padding: "8px 0", cursor: "pointer", borderBottom: i < section.items.length - 1 ? "1px solid #141414" : "none" }}>
-                                  <div style={{ paddingTop: 1 }}><Tick done={done} color={phase.color} /></div>
-                                  <span style={{ fontSize: 13, lineHeight: 1.5, color: done ? "#3a3a3a" : "#aaa", textDecoration: done ? "line-through" : "none", transition: "all 0.2s" }}>{item}</span>
+                                <div key={i} style={{ borderBottom: i < section.items.length - 1 ? "1px solid #141414" : "none" }}>
+                                  <div onClick={function() { toggleItem(key); }} style={{ display: "flex", alignItems: "flex-start", gap: 11, padding: "9px 0 6px", cursor: "pointer" }}>
+                                    <div style={{ paddingTop: 1 }}><Tick done={done} color={phase.color} /></div>
+                                    <span style={{ fontSize: 13, lineHeight: 1.5, color: done ? "#3a3a3a" : "#aaa", textDecoration: done ? "line-through" : "none", transition: "all 0.2s" }}>{item.label}</span>
+                                  </div>
+                                  {hasTopics && (
+                                    <div style={{ paddingLeft: 33, paddingBottom: 8 }}>
+                                      {item.topics.map(function(topic, ti) {
+                                        return (
+                                          <div key={ti} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "2px 0" }}>
+                                            <span style={{ color: "#2a2a2a", flexShrink: 0, fontSize: 14, lineHeight: 1.4 }}>·</span>
+                                            <span style={{ fontSize: 12, color: done ? "#2a2a2a" : "#4a4a4a", lineHeight: 1.5 }}>{topic}</span>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  )}
                                 </div>
                               );
                             })}
