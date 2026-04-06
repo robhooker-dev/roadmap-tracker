@@ -86,6 +86,7 @@ const PHASES = [
         { label: "✅ Attention mechanism", topics: ["Self-attention — query, key, value", "Multi-head attention", "Positional encoding"] },
         { label: "📄 Attention Is All You Need (Vaswani et al., 2017 — free)", topics: ["Original transformer paper"] },
         { label: "📖 The Illustrated Transformer (Jay Alammar — free)", topics: ["Visual walkthrough of transformer internals"] },
+        { label: "📺 Intro to Large Language Models (Andrej Karpathy — YouTube, free)", topics: ["How LLMs are trained and how they work internally", "Tokens, context windows, and next-token prediction", "RLHF, scaling laws, and emergent capabilities", "Practical mental model for LLM behaviour"] },
       ]},
       { title: "RAG — Retrieval Augmented Generation", items: [
         { label: "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)", topics: ["Embeddings and vector representations", "Vector databases — Pinecone, Chroma, pgvector"] },
@@ -139,6 +140,10 @@ const PHASES = [
       { title: "Security & Adversarial AI", items: [
         { label: "📚 Red Teaming LLM Applications (DeepLearning.AI — free)", topics: ["Prompt injection attacks and mitigation", "AI red-teaming concepts"] },
         { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", topics: ["Bias and fairness in AI systems", "EU AI Act, UK regulation, ethics frameworks"] },
+      ]},
+      { title: "Power BI & Data Visualisation for Stakeholders", items: [
+        { label: "Power BI Desktop — awareness level (Phase 4/5)", topics: ["Building dashboards and reports for non-technical stakeholders", "Connecting to data sources — SQL, Excel, APIs", "DAX basics — calculated columns and measures", "Publishing to Power BI Service and sharing reports"] },
+        { label: "Power BI as a bridge to enterprise platforms", topics: ["Conceptual overlap with Palantir Foundry's Workshop layer — dashboards driven by ontology data", "Conceptual overlap with Quantexa's visualisation and decision intelligence layers", "Pattern to learn: build in Power BI first, then map concepts to Foundry/Quantexa when encountered in a role"] },
       ]},
       { title: "Production AI Systems", items: [
         { label: "📚 Learn Docker (Boot.dev — free to start)", topics: ["Docker for AI deployment — containerising FastAPI + LLM services, docker-compose for local dev"] },
@@ -247,6 +252,7 @@ const COURSE_URLS = {
   // Phase 3 — Transformer & Attention
   "📄 Attention Is All You Need (Vaswani et al., 2017 — free)": "https://arxiv.org/abs/1706.03762",
   "📖 The Illustrated Transformer (Jay Alammar — free)": "https://jalammar.github.io/illustrated-transformer/",
+  "📺 Intro to Large Language Models (Andrej Karpathy — YouTube, free)": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
   // Phase 3 — RAG
   "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)": "https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/",
   "📚 Building & Evaluating Advanced RAG (DeepLearning.AI — free)": "https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/",
