@@ -4,6 +4,11 @@ const PHASES = [
   {
     id: "phase1", label: "Phase 1", title: "Foundations", months: "Months 1–3", color: "#1a4a7a",
     sections: [
+      { title: "AI Fundamentals", items: [
+        { label: "📚 Elements of AI (University of Helsinki — free, certificate)", topics: ["What is AI — history, definitions, and scope", "Machine learning basics in plain English", "Neural networks and deep learning concepts", "AI applications — real-world use cases", "AI ethics and societal implications"] },
+        { label: "📚 Generative AI for Beginners (Microsoft — free, 18 lessons)", topics: ["How large language models work", "Prompt engineering basics", "Building generative AI applications", "Responsible AI principles"] },
+        { label: "📚 Introduction to Generative AI (Google Cloud Skills Boost — free)", topics: ["Generative AI vs traditional AI — key differences", "How generative models are trained and used", "Google's GenAI tools and use cases"] },
+      ]},
       { title: "Python", items: [
         { label: "📚 Programming for Everybody — Getting Started with Python (Coursera)", topics: ["Data types, variables, loops, conditionals, functions", "Virtual environments, pip, requirements.txt"] },
         { label: "📚 Python Data Structures (Coursera)", topics: ["OOP basics — classes, methods, inheritance"] },
@@ -32,6 +37,12 @@ const PHASES = [
       { title: "IT Networking", items: [
         { label: "📚 Google IT Support Professional Certificate (Coursera)", topics: ["OSI model and TCP/IP stack", "IP addressing, subnetting, CIDR notation", "DNS, DHCP, HTTP/HTTPS, SSH protocols", "Firewalls, VPNs, network security basics"] },
         { label: "📚 Professor Messer's CompTIA Network+ (YouTube — free)", topics: ["Network troubleshooting — ping, tracert, nslookup, netstat"] },
+      ]},
+      { title: "Applied Probability & Statistics", items: [
+        { label: "📅 Scheduled week: probability and statistics for ML", topics: ["Probability basics — events, Bayes' theorem, conditional probability", "Distributions — normal, binomial, Poisson", "Descriptive statistics — mean, variance, standard deviation", "Hypothesis testing and p-values"] },
+      ]},
+      { title: "Applied Linear Algebra", items: [
+        { label: "✅ Vectors and matrices checkpoint", topics: ["Vectors — dot product, norms, cosine similarity", "Matrices — multiplication, transpose, inverse", "Eigenvalues and eigenvectors", "Applications to embeddings and neural networks"] },
       ]},
       { title: "CompSci Algorithms & Data Structures", items: [
         { label: "📚 CS50: Introduction to Computer Science (Harvard/edX — free)", topics: ["Big O notation — time and space complexity", "Data structures — arrays, linked lists, stacks, queues", "Sorting algorithms — merge sort, quick sort, binary search"] },
@@ -71,6 +82,11 @@ const PHASES = [
   {
     id: "phase3", label: "Phase 3", title: "AI Engineering Core", months: "Months 6–11", color: "#6b3a1e",
     sections: [
+      { title: "Transformer Architecture & Attention", items: [
+        { label: "✅ Attention mechanism", topics: ["Self-attention — query, key, value", "Multi-head attention", "Positional encoding"] },
+        { label: "📄 Attention Is All You Need (Vaswani et al., 2017 — free)", topics: ["Original transformer paper"] },
+        { label: "📖 The Illustrated Transformer (Jay Alammar — free)", topics: ["Visual walkthrough of transformer internals"] },
+      ]},
       { title: "RAG — Retrieval Augmented Generation", items: [
         { label: "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)", topics: ["Embeddings and vector representations", "Vector databases — Pinecone, Chroma, pgvector"] },
         { label: "📚 Building & Evaluating Advanced RAG (DeepLearning.AI — free)", topics: ["Chunking strategies for documents", "Retrieval pipelines — similarity search, hybrid search", "Build a document Q&A system"] },
@@ -105,9 +121,20 @@ const PHASES = [
       { title: "Graph & Network Analysis", items: [
         { label: "📚 Applied Social Network Analysis in Python (Coursera — University of Michigan)", topics: ["Graph theory basics — nodes, edges, paths, centrality", "NetworkX — Python graph library", "Entity resolution — record linkage, deduplication", "Knowledge graphs — Neo4j intro"] },
       ]},
+      { title: "Classical ML Fundamentals", items: [
+        { label: "📚 Machine Learning Crash Course (Google — free)", topics: ["Foundational ML concepts — features, labels, loss functions", "Linear regression and logistic regression", "Neural network intuition", "Interactive exercises with TensorFlow Playground"] },
+        { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", topics: ["Scikit-learn — end-to-end ML pipelines", "Supervised learning — regression, decision trees, random forests, SVMs", "Unsupervised learning — k-means clustering, PCA", "Model evaluation — accuracy, precision, recall, F1, ROC-AUC"] },
+        { label: "Train/test splits, cross-validation, and overfitting", topics: [] },
+        { label: "Feature engineering and preprocessing", topics: [] },
+      ]},
       { title: "Machine Learning Fundamentals", items: [
         { label: "📚 Machine Learning Specialization (Coursera — Andrew Ng / DeepLearning.AI)", topics: ["Supervised vs unsupervised learning", "Classification, clustering, anomaly detection", "Evaluation — precision, recall, F1, ROC curves"] },
         { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", topics: ["Scikit-learn — end-to-end ML pipelines"] },
+      ]},
+      { title: "AI Safety, Ethics & Governance", items: [
+        { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", topics: ["AI alignment concepts — goal misgeneralisation, reward hacking", "Bias and fairness in AI systems", "EU AI Act — risk tiers, prohibited uses, compliance obligations", "UK AI regulation landscape and ethics frameworks", "Responsible AI deployment — transparency, explainability, accountability"] },
+        { label: "Model cards and datasheets for datasets", topics: [] },
+        { label: "Conducting a Data Protection Impact Assessment (DPIA) for AI", topics: [] },
       ]},
       { title: "Security & Adversarial AI", items: [
         { label: "📚 Red Teaming LLM Applications (DeepLearning.AI — free)", topics: ["Prompt injection attacks and mitigation", "AI red-teaming concepts"] },
@@ -119,6 +146,7 @@ const PHASES = [
         { label: "Caching strategies — semantic caching, prompt caching, response caching", topics: [] },
         { label: "Streaming responses — SSE, chunked output, progressive UI updates", topics: [] },
         { label: "Model routing — task-based routing, cost-tier routing, fallback chains", topics: [] },
+        { label: "Model monitoring and logging post-deployment", topics: ["Structured logging — request/response capture, latency, token usage", "Drift detection — quality regression and input distribution shifts", "Alerting — failure rate thresholds, latency SLAs", "Observability tools — LangSmith, Evidently AI, custom dashboards"] },
       ]},
     ],
   },
