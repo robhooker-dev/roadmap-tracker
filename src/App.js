@@ -3,183 +3,191 @@ import { useState, useEffect, useCallback } from "react";
 const PHASES = [
   {
     id: "phase1", label: "Phase 1", title: "Foundations", months: "Months 1–3", color: "#1a4a7a",
+    milestone: "Deploy a LangChain-powered chatbot using the Anthropic API that reads from a structured data source and returns formatted responses — published to GitHub with a README.",
+    roleRelevance: "Establishes the Python and API fluency that underpins all Palantir AIP scripting and Quantexa pipeline work. Prompt engineering is a day-one requirement in NCA and BAE Systems AI tool evaluation and deployment roles.",
     sections: [
-      { title: "AI Fundamentals", items: [
-        { label: "📚 Elements of AI (University of Helsinki — free, certificate)", topics: ["What is AI — history, definitions, and scope", "Machine learning basics in plain English", "Neural networks and deep learning concepts", "AI applications — real-world use cases", "AI ethics and societal implications"] },
-        { label: "📚 Generative AI for Beginners (Microsoft — free, 18 lessons)", topics: ["How large language models work", "Prompt engineering basics", "Building generative AI applications", "Responsible AI principles"] },
-        { label: "📚 Introduction to Generative AI (Google Cloud Skills Boost — free)", topics: ["Generative AI vs traditional AI — key differences", "How generative models are trained and used", "Google's GenAI tools and use cases"] },
+      { title: "AI Fundamentals", weeks: 1, items: [
+        { label: "📚 Elements of AI (University of Helsinki — free, certificate)", cost: "free", topics: ["What is AI — history, definitions, and scope", "Machine learning basics in plain English", "Neural networks and deep learning concepts", "AI applications — real-world use cases", "AI ethics and societal implications"] },
+        { label: "📚 Generative AI for Beginners (Microsoft — free, 18 lessons)", cost: "free", topics: ["How large language models work", "Prompt engineering basics", "Building generative AI applications", "Responsible AI principles"] },
+        { label: "📚 Introduction to Generative AI (Google Cloud Skills Boost — free)", cost: "free", topics: ["Generative AI vs traditional AI — key differences", "How generative models are trained and used", "Google's GenAI tools and use cases"] },
       ]},
-      { title: "Python", items: [
-        { label: "📚 Programming for Everybody — Getting Started with Python (Coursera)", topics: ["Data types, variables, loops, conditionals, functions", "Virtual environments, pip, requirements.txt"] },
-        { label: "📚 Python Data Structures (Coursera)", topics: ["OOP basics — classes, methods, inheritance"] },
-        { label: "📚 Using Python to Access Web Data (Coursera)", topics: ["File I/O, working with JSON, error handling"] },
-        { label: "📚 Using Databases with Python (Coursera)", topics: [] },
-        { label: "📚 Capstone — Retrieving, Processing & Visualising Data with Python (Coursera)", topics: [] },
+      { title: "Python", weeks: 4, items: [
+        { label: "📚 Programming for Everybody — Getting Started with Python (Coursera)", cost: "medium", topics: ["Data types, variables, loops, conditionals, functions", "Virtual environments, pip, requirements.txt"] },
+        { label: "📚 Python Data Structures (Coursera)", cost: "medium", topics: ["OOP basics — classes, methods, inheritance"] },
+        { label: "📚 Using Python to Access Web Data (Coursera)", cost: "medium", topics: ["File I/O, working with JSON, error handling"] },
+        { label: "📚 Using Databases with Python (Coursera)", cost: "medium", topics: [] },
+        { label: "📚 Capstone — Retrieving, Processing & Visualising Data with Python (Coursera)", cost: "medium", topics: [] },
       ]},
-      { title: "VS Code", items: [
-        { label: "📚 Visual Studio Code Crash Course (freeCodeCamp — YouTube, free)", topics: ["Interface and navigation — explorer, editor groups, command palette", "Extensions — Python, Pylance, GitLens, GitHub Copilot setup", "Integrated terminal and Git integration", "Debugging — breakpoints, watch variables, debug console", "Keyboard shortcuts and workspace productivity tips"] },
+      { title: "VS Code", weeks: 1, items: [
+        { label: "📚 Visual Studio Code Crash Course (freeCodeCamp — YouTube, free)", cost: "free", topics: ["Interface and navigation — explorer, editor groups, command palette", "Extensions — Python, Pylance, GitLens, GitHub Copilot setup", "Integrated terminal and Git integration", "Debugging — breakpoints, watch variables, debug console", "Keyboard shortcuts and workspace productivity tips"] },
       ]},
-      { title: "Prompt Engineering", items: [
-        { label: "📚 ChatGPT Prompt Engineering for Developers (DeepLearning.AI — free)", topics: ["Zero-shot, few-shot, chain-of-thought prompting", "System prompts and role definition", "Structured output (JSON mode)", "Prompt chaining and iterative refinement"] },
-        { label: "📚 Anthropic Prompt Engineering Interactive Tutorial (Anthropic docs — free)", topics: ["Anthropic-specific guidance — Constitutional AI"] },
+      { title: "Prompt Engineering", weeks: 1, items: [
+        { label: "📚 ChatGPT Prompt Engineering for Developers (DeepLearning.AI — free)", cost: "free", topics: ["Zero-shot, few-shot, chain-of-thought prompting", "System prompts and role definition", "Structured output (JSON mode)", "Prompt chaining and iterative refinement"] },
+        { label: "📚 Anthropic Prompt Engineering Interactive Tutorial (Anthropic docs — free)", cost: "free", topics: ["Anthropic-specific guidance — Constitutional AI"] },
       ]},
-      { title: "API Usage", items: [
-        { label: "📚 Building Systems with the ChatGPT API (DeepLearning.AI — free)", topics: ["REST API concepts — requests, responses, headers, auth", "Anthropic API — messages endpoint", "Handling rate limits and errors", "Streaming responses", "Managing conversation history / context windows"] },
+      { title: "API Usage", weeks: 1, items: [
+        { label: "📚 Building Systems with the ChatGPT API (DeepLearning.AI — free)", cost: "free", topics: ["REST API concepts — requests, responses, headers, auth", "Anthropic API — messages endpoint", "Handling rate limits and errors", "Streaming responses", "Managing conversation history / context windows"] },
       ]},
-      { title: "LangChain", items: [
-        { label: "📚 LangChain for LLM Application Development (DeepLearning.AI — free)", topics: ["Chains — basic sequential chains", "Prompt templates", "Memory — conversation buffer, summary memory"] },
-        { label: "📚 LangChain: Chat with Your Data (DeepLearning.AI — free)", topics: ["Agents and tools", "Document loaders and text splitters"] },
+      { title: "LangChain", weeks: 1, items: [
+        { label: "📚 LangChain for LLM Application Development (DeepLearning.AI — free)", cost: "free", topics: ["Chains — basic sequential chains", "Prompt templates", "Memory — conversation buffer, summary memory"] },
+        { label: "📚 LangChain: Chat with Your Data (DeepLearning.AI — free)", cost: "free", topics: ["Agents and tools", "Document loaders and text splitters"] },
       ]},
-      { title: "Scripting (Bash & PowerShell)", items: [
-        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", topics: ["Bash — variables, loops, conditionals, functions", "File management scripts — copying, moving, archiving", "Scheduled tasks and cron job basics"] },
-        { label: "📚 PowerShell Master Class (Udemy — John Savill)", topics: ["PowerShell — cmdlets, pipelines, scripts", "Automation scripts for system tasks"] },
-      ]},
-      { title: "IT Networking", items: [
-        { label: "📚 Google IT Support Professional Certificate (Coursera)", topics: ["OSI model and TCP/IP stack", "IP addressing, subnetting, CIDR notation", "DNS, DHCP, HTTP/HTTPS, SSH protocols", "Firewalls, VPNs, network security basics"] },
-        { label: "📚 Professor Messer's CompTIA Network+ (YouTube — free)", topics: ["Network troubleshooting — ping, tracert, nslookup, netstat"] },
-      ]},
-      { title: "Applied Probability & Statistics", items: [
-        { label: "📅 Scheduled week: probability and statistics for ML", topics: ["Probability basics — events, Bayes' theorem, conditional probability", "Distributions — normal, binomial, Poisson", "Descriptive statistics — mean, variance, standard deviation", "Hypothesis testing and p-values"] },
-      ]},
-      { title: "Applied Linear Algebra", items: [
-        { label: "✅ Vectors and matrices checkpoint", topics: ["Vectors — dot product, norms, cosine similarity", "Matrices — multiplication, transpose, inverse", "Eigenvalues and eigenvectors", "Applications to embeddings and neural networks"] },
-      ]},
-      { title: "CompSci Algorithms & Data Structures", items: [
-        { label: "📚 CS50: Introduction to Computer Science (Harvard/edX — free)", topics: ["Big O notation — time and space complexity", "Data structures — arrays, linked lists, stacks, queues", "Sorting algorithms — merge sort, quick sort, binary search"] },
-        { label: "📚 Algorithms Specialization (Coursera — Stanford)", topics: ["Trees and graphs — traversal, BFS, DFS", "Dynamic programming basics"] },
+      { title: "Applied Probability & Statistics", weeks: 1, items: [
+        { label: "📅 Scheduled week: probability and statistics for ML", cost: null, topics: ["Probability basics — events, Bayes' theorem, conditional probability", "Distributions — normal, binomial, Poisson", "Descriptive statistics — mean, variance, standard deviation", "Hypothesis testing and p-values"] },
       ]},
     ],
   },
   {
     id: "phase2", label: "Phase 2", title: "Backend & Data", months: "Months 3–6", color: "#1e6b4a",
+    milestone: "Build and deploy a full-stack REST API with JWT authentication, a PostgreSQL database, Docker containerisation, and an automated CI/CD pipeline via GitHub Actions — live on Azure.",
+    roleRelevance: "Backend and data engineering are core to Palantir Foundry integration (API-driven pipelines, SQL-heavy ontology building) and Quantexa deployments (data ingestion, entity resolution). NCA and BAE Systems roles require secure API development and server deployment knowledge.",
     sections: [
-      { title: "Node.js & Express", items: [
-        { label: "📚 The Complete Node.js Developer Course (Udemy — Andrew Mead)", topics: ["JavaScript fundamentals — async/await, promises, modules", "Building REST APIs with Express", "Middleware, routing, error handling", "Authentication — JWT, sessions", "Environment variables and secrets management"] },
+      { title: "Node.js & Express", weeks: 2, items: [
+        { label: "📚 The Complete Node.js Developer Course (Udemy — Andrew Mead)", cost: "low", topics: ["JavaScript fundamentals — async/await, promises, modules", "Building REST APIs with Express", "Middleware, routing, error handling", "Authentication — JWT, sessions", "Environment variables and secrets management"] },
       ]},
-      { title: "Databases & SQL", items: [
-        { label: "📚 The Complete SQL Bootcamp (Udemy — Jose Portilla)", topics: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes", "Subqueries, CTEs, and window functions", "Stored procedures and triggers", "Query optimisation and execution plans", "Transactions and ACID properties"] },
-        { label: "📚 PostgreSQL for Everybody (Coursera — Dr. Chuck)", topics: ["PostgreSQL — setup, querying, schema design", "Supabase — hosted Postgres, auth, row-level security", "Data modelling — relational design, normalisation"] },
+      { title: "Databases & SQL", weeks: 3, items: [
+        { label: "📚 The Complete SQL Bootcamp (Udemy — Jose Portilla)", cost: "low", topics: ["SQL fundamentals — SELECT, JOIN, GROUP BY, indexes", "Subqueries, CTEs, and window functions", "Stored procedures and triggers", "Query optimisation and execution plans", "Transactions and ACID properties"] },
+        { label: "📚 PostgreSQL for Everybody (Coursera — Dr. Chuck)", cost: "medium", topics: ["PostgreSQL — setup, querying, schema design", "Supabase — hosted Postgres, auth, row-level security", "Data modelling — relational design, normalisation"] },
       ]},
-      { title: "Authentication & Security", items: [
-        { label: "📚 Web Application Security — OWASP Top 10 (OWASP.org — free)", topics: ["OAuth 2.0 concepts", "Supabase Auth or Auth0", "Role-based access control (RBAC)", "Securing API endpoints"] },
+      { title: "Authentication & Security", weeks: 1, items: [
+        { label: "📚 Web Application Security — OWASP Top 10 (OWASP.org — free)", cost: "free", topics: ["OAuth 2.0 concepts", "Supabase Auth or Auth0", "Role-based access control (RBAC)", "Securing API endpoints"] },
       ]},
-      { title: "Deployment & DevOps", items: [
-        { label: "📚 Docker & Kubernetes: The Practical Guide (Udemy — Maximilian Schwarzmüller)", topics: ["Docker — containers, images, docker-compose", "Environment management — dev/staging/prod", "Azure cloud basics"] },
-        { label: "📚 GitHub Actions — The Complete Guide (Udemy)", topics: ["CI/CD — GitHub Actions"] },
+      { title: "Deployment & DevOps", weeks: 2, items: [
+        { label: "📚 Docker & Kubernetes: The Practical Guide (Udemy — Maximilian Schwarzmüller)", cost: "low", topics: ["Docker — containers, images, docker-compose", "Environment management — dev/staging/prod", "Azure cloud basics"] },
+        { label: "📚 GitHub Actions — The Complete Guide (Udemy)", cost: "low", topics: ["CI/CD — GitHub Actions"] },
       ]},
-      { title: "Linux & Windows Servers", items: [
-        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", topics: ["Linux command line — navigation, permissions, file management", "User and process management, services (systemd)", "Logs, monitoring, and basic troubleshooting"] },
-        { label: "📚 Windows Server Administration (Microsoft Learn — free)", topics: ["Windows Server basics — Active Directory, Group Policy", "SSH, remote desktop, and server hardening basics"] },
+      { title: "IT Networking", weeks: 1, items: [
+        { label: "📚 Google IT Support Professional Certificate (Coursera)", cost: "medium", topics: ["OSI model and TCP/IP stack", "IP addressing, subnetting, CIDR notation", "DNS, DHCP, HTTP/HTTPS, SSH protocols", "Firewalls, VPNs, network security basics"] },
+        { label: "📚 Professor Messer's CompTIA Network+ (YouTube — free)", cost: "free", topics: ["Network troubleshooting — ping, tracert, nslookup, netstat"] },
       ]},
-      { title: "Developer Tools", items: [
-        { label: "📚 Git & GitHub — The Complete Guide (Udemy — Maximilian Schwarzmüller)", topics: ["Git advanced — branching strategies, rebasing, stashing", "VS Code — extensions, debugging, keyboard shortcuts", "Postman / Insomnia for API testing", "Browser DevTools — network tab, console, performance", "Terminal productivity — aliases, dotfiles, shell customisation"] },
+      { title: "Scripting (Bash & PowerShell)", weeks: 1, items: [
+        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", cost: "low", topics: ["Bash — variables, loops, conditionals, functions", "File management scripts — copying, moving, archiving", "Scheduled tasks and cron job basics"] },
+        { label: "📚 PowerShell Master Class (Udemy — John Savill)", cost: "low", topics: ["PowerShell — cmdlets, pipelines, scripts", "Automation scripts for system tasks"] },
       ]},
-      { title: "Application Development Skills", items: [
-        { label: "📚 Software Design & Architecture Specialization (Coursera — University of Alberta)", topics: ["Software design patterns — MVC, repository, factory", "SOLID principles", "Unit testing, integration testing, TDD basics", "Code review practices and standards", "API design — RESTful conventions, versioning, documentation"] },
+      { title: "Linux & Windows Servers", weeks: 1, items: [
+        { label: "📚 The Linux Command Line Bootcamp (Udemy — Colt Steele)", cost: "low", topics: ["Linux command line — navigation, permissions, file management", "User and process management, services (systemd)", "Logs, monitoring, and basic troubleshooting"] },
+        { label: "📚 Windows Server Administration (Microsoft Learn — free)", cost: "free", topics: ["Windows Server basics — Active Directory, Group Policy", "SSH, remote desktop, and server hardening basics"] },
+      ]},
+      { title: "Developer Tools", weeks: 1, items: [
+        { label: "📚 Git & GitHub — The Complete Guide (Udemy — Maximilian Schwarzmüller)", cost: "low", topics: ["Git advanced — branching strategies, rebasing, stashing", "VS Code — extensions, debugging, keyboard shortcuts", "Postman / Insomnia for API testing", "Browser DevTools — network tab, console, performance", "Terminal productivity — aliases, dotfiles, shell customisation"] },
+      ]},
+      { title: "Application Development Skills", weeks: 2, items: [
+        { label: "📚 Software Design & Architecture Specialization (Coursera — University of Alberta)", cost: "medium", topics: ["Software design patterns — MVC, repository, factory", "SOLID principles", "Unit testing, integration testing, TDD basics", "Code review practices and standards", "API design — RESTful conventions, versioning, documentation"] },
       ]},
     ],
   },
   {
     id: "phase3", label: "Phase 3", title: "AI Engineering Core", months: "Months 6–11", color: "#6b3a1e",
+    milestone: "Build a working RAG pipeline that ingests a document set, stores embeddings in a vector database, and answers questions with cited sources — with a multi-step LangGraph agent layer and a LangSmith observability dashboard.",
+    roleRelevance: "The core differentiator for all four target roles — RAG pipelines and agent systems are central to Palantir AIP and Quantexa's AI layer. LLM Ops and evaluation skills are directly applicable to NCA's responsible AI deployment requirements and BAE Systems AI integration programmes.",
     sections: [
-      { title: "Transformer Architecture & Attention", items: [
-        { label: "✅ Attention mechanism", topics: ["Self-attention — query, key, value", "Multi-head attention", "Positional encoding"] },
-        { label: "📄 Attention Is All You Need (Vaswani et al., 2017 — free)", topics: ["Original transformer paper"] },
-        { label: "📖 The Illustrated Transformer (Jay Alammar — free)", topics: ["Visual walkthrough of transformer internals"] },
-        { label: "📺 Intro to Large Language Models (Andrej Karpathy — YouTube, free)", topics: ["How LLMs are trained and how they work internally", "Tokens, context windows, and next-token prediction", "RLHF, scaling laws, and emergent capabilities", "Practical mental model for LLM behaviour"] },
+      { title: "CompSci Algorithms & Data Structures", weeks: 3, items: [
+        { label: "📚 CS50: Introduction to Computer Science (Harvard/edX — free)", cost: "free", topics: ["Big O notation — time and space complexity", "Data structures — arrays, linked lists, stacks, queues", "Sorting algorithms — merge sort, quick sort, binary search"] },
+        { label: "📚 Algorithms Specialization (Coursera — Stanford)", cost: "medium", topics: ["Trees and graphs — traversal, BFS, DFS", "Dynamic programming basics"] },
       ]},
-      { title: "RAG — Retrieval Augmented Generation", items: [
-        { label: "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)", topics: ["Embeddings and vector representations", "Vector databases — Pinecone, Chroma, pgvector"] },
-        { label: "📚 Building & Evaluating Advanced RAG (DeepLearning.AI — free)", topics: ["Chunking strategies for documents", "Retrieval pipelines — similarity search, hybrid search", "Build a document Q&A system"] },
+      { title: "Applied Linear Algebra", weeks: 1, items: [
+        { label: "✅ Vectors and matrices checkpoint", cost: null, topics: ["Vectors — dot product, norms, cosine similarity", "Matrices — multiplication, transpose, inverse", "Eigenvalues and eigenvectors", "Applications to embeddings and neural networks"] },
       ]},
-      { title: "Agents & Agentic Systems", items: [
-        { label: "📚 Functions, Tools and Agents with LangChain (DeepLearning.AI — free)", topics: ["Tool use / function calling", "ReAct pattern — reasoning + acting"] },
-        { label: "📚 Safe and Reliable AI via Guardrails (DeepLearning.AI — free)", topics: ["Guardrails and output safety — validation, refusals, content filtering"] },
-        { label: "📚 AI Agents in LangGraph (DeepLearning.AI — free)", topics: ["LangGraph — agent orchestration", "Multi-step agent workflows"] },
-        { label: "📚 Multi AI Agent Systems with crewAI (DeepLearning.AI — free)", topics: ["Human-in-the-loop design"] },
-        { label: "📚 Agent Memory: Building Memory-Aware Agents (DeepLearning.AI — free)", topics: [] },
+      { title: "Transformer Architecture & Attention", weeks: 2, items: [
+        { label: "✅ Attention mechanism", cost: null, topics: ["Self-attention — query, key, value", "Multi-head attention", "Positional encoding"] },
+        { label: "📄 Attention Is All You Need (Vaswani et al., 2017 — free)", cost: "free", topics: ["Original transformer paper"] },
+        { label: "📖 The Illustrated Transformer (Jay Alammar — free)", cost: "free", topics: ["Visual walkthrough of transformer internals"] },
+        { label: "📺 Intro to Large Language Models (Andrej Karpathy — YouTube, free)", cost: "free", topics: ["How LLMs are trained and how they work internally", "Tokens, context windows, and next-token prediction", "RLHF, scaling laws, and emergent capabilities", "Practical mental model for LLM behaviour"] },
       ]},
-      { title: "LLM Ops", items: [
-        { label: "📚 LLMOps (DeepLearning.AI — free)", topics: ["Prompt versioning and management — tracking prompt changes alongside model versions", "Cost management and token optimisation", "Fine-tuning concepts"] },
-        { label: "📚 Evaluating and Debugging Generative AI (DeepLearning.AI — free)", topics: ["Evaluation — measuring LLM output quality", "Logging and observability — LangSmith"] },
-        { label: "📚 LLM Evaluation — Evidently AI (Evidently AI — free)", topics: ["Production monitoring — failure detection, latency alerts, quality regression dashboards"] },
+      { title: "RAG — Retrieval Augmented Generation", weeks: 3, items: [
+        { label: "📚 Vector Databases: From Embeddings to Applications (DeepLearning.AI — free)", cost: "free", topics: ["Embeddings and vector representations", "Vector databases — Pinecone, Chroma, pgvector"] },
+        { label: "📚 Building & Evaluating Advanced RAG (DeepLearning.AI — free)", cost: "free", topics: ["Chunking strategies for documents", "Retrieval pipelines — similarity search, hybrid search", "Build a document Q&A system"] },
       ]},
-      { title: "Structured Outputs & Data Extraction", items: [
-        { label: "Getting reliable JSON from LLMs", topics: [] },
-        { label: "Pydantic for output validation", topics: [] },
-        { label: "Entity extraction pipelines", topics: [] },
-        { label: "End-to-end extraction workflows", topics: [] },
+      { title: "Agents & Agentic Systems", weeks: 4, items: [
+        { label: "📚 Functions, Tools and Agents with LangChain (DeepLearning.AI — free)", cost: "free", topics: ["Tool use / function calling", "ReAct pattern — reasoning + acting"] },
+        { label: "📚 Safe and Reliable AI via Guardrails (DeepLearning.AI — free)", cost: "free", topics: ["Guardrails and output safety — validation, refusals, content filtering"] },
+        { label: "📚 AI Agents in LangGraph (DeepLearning.AI — free)", cost: "free", topics: ["LangGraph — agent orchestration", "Multi-step agent workflows"] },
+        { label: "📚 Multi AI Agent Systems with crewAI (DeepLearning.AI — free)", cost: "free", topics: ["Human-in-the-loop design"] },
+        { label: "📚 Agent Memory: Building Memory-Aware Agents (DeepLearning.AI — free)", cost: "free", topics: [] },
+      ]},
+      { title: "LLM Ops", weeks: 3, items: [
+        { label: "📚 LLMOps (DeepLearning.AI — free)", cost: "free", topics: ["Prompt versioning and management — tracking prompt changes alongside model versions", "Cost management and token optimisation", "Fine-tuning concepts"] },
+        { label: "📚 Evaluating and Debugging Generative AI (DeepLearning.AI — free)", cost: "free", topics: ["Evaluation — measuring LLM output quality", "Logging and observability — LangSmith"] },
+        { label: "📚 LLM Evaluation — Evidently AI (Evidently AI — free)", cost: "free", topics: ["Production monitoring — failure detection, latency alerts, quality regression dashboards"] },
+      ]},
+      { title: "Structured Outputs & Data Extraction", weeks: 2, items: [
+        { label: "Getting reliable JSON from LLMs", cost: null, topics: [] },
+        { label: "Pydantic for output validation", cost: null, topics: [] },
+        { label: "Entity extraction pipelines", cost: null, topics: [] },
+        { label: "End-to-end extraction workflows", cost: null, topics: [] },
       ]},
     ],
   },
   {
     id: "phase4", label: "Phase 4", title: "Domain Specialisation", months: "Months 11–15", color: "#5a1e6b",
+    milestone: "Complete the Machine Learning Specialization (Andrew Ng) certificate and publish a documented Kaggle notebook with a full ML pipeline — feature engineering, model training, and evaluation metrics — on a real policing or financial crime dataset.",
+    roleRelevance: "Directly maps to role-specific tooling — graph and network analysis mirrors Quantexa's entity resolution engine; ML fundamentals underpin Palantir's model deployment workflows; AI safety and governance is a hard requirement for NCA and BAE Systems in regulated, high-stakes AI contexts.",
     sections: [
-      { title: "Data & Analytics", items: [
-        { label: "📚 Pandas & Data Visualisation (Kaggle Learn — free)", topics: ["Pandas — DataFrames, filtering, grouping, merging", "NumPy basics — arrays, numerical operations", "Data visualisation — Matplotlib, Plotly"] },
-        { label: "📚 Data Analysis with Python (Coursera — IBM)", topics: ["Working with unstructured data — PDFs, emails, documents"] },
+      { title: "Data & Analytics", weeks: 2, items: [
+        { label: "📚 Pandas & Data Visualisation (Kaggle Learn — free)", cost: "free", topics: ["Pandas — DataFrames, filtering, grouping, merging", "NumPy basics — arrays, numerical operations", "Data visualisation — Matplotlib, Plotly"] },
+        { label: "📚 Data Analysis with Python (Coursera — IBM)", cost: "medium", topics: ["Working with unstructured data — PDFs, emails, documents"] },
       ]},
-      { title: "Graph & Network Analysis", items: [
-        { label: "📚 Applied Social Network Analysis in Python (Coursera — University of Michigan)", topics: ["Graph theory basics — nodes, edges, paths, centrality", "NetworkX — Python graph library", "Entity resolution — record linkage, deduplication", "Knowledge graphs — Neo4j intro"] },
+      { title: "Graph & Network Analysis", weeks: 2, items: [
+        { label: "📚 Applied Social Network Analysis in Python (Coursera — University of Michigan)", cost: "medium", topics: ["Graph theory basics — nodes, edges, paths, centrality", "NetworkX — Python graph library", "Entity resolution — record linkage, deduplication", "Knowledge graphs — Neo4j intro"] },
       ]},
-      { title: "Classical ML Fundamentals", items: [
-        { label: "📚 Machine Learning Crash Course (Google — free)", topics: ["Foundational ML concepts — features, labels, loss functions", "Linear regression and logistic regression", "Neural network intuition", "Interactive exercises with TensorFlow Playground"] },
-        { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", topics: ["Scikit-learn — end-to-end ML pipelines", "Supervised learning — regression, decision trees, random forests, SVMs", "Unsupervised learning — k-means clustering, PCA", "Model evaluation — accuracy, precision, recall, F1, ROC-AUC"] },
-        { label: "Train/test splits, cross-validation, and overfitting", topics: [] },
-        { label: "Feature engineering and preprocessing", topics: [] },
+      { title: "Classical ML Fundamentals", weeks: 3, items: [
+        { label: "📚 Machine Learning Crash Course (Google — free)", cost: "free", topics: ["Foundational ML concepts — features, labels, loss functions", "Linear regression and logistic regression", "Neural network intuition", "Interactive exercises with TensorFlow Playground"] },
+        { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", cost: "free", topics: ["Scikit-learn — end-to-end ML pipelines", "Supervised learning — regression, decision trees, random forests, SVMs", "Unsupervised learning — k-means clustering, PCA", "Model evaluation — accuracy, precision, recall, F1, ROC-AUC"] },
+        { label: "Train/test splits, cross-validation, and overfitting", cost: null, topics: [] },
+        { label: "Feature engineering and preprocessing", cost: null, topics: [] },
       ]},
-      { title: "Machine Learning Fundamentals", items: [
-        { label: "📚 Machine Learning Specialization (Coursera — Andrew Ng / DeepLearning.AI)", topics: ["Supervised vs unsupervised learning", "Classification, clustering, anomaly detection", "Evaluation — precision, recall, F1, ROC curves"] },
-        { label: "📚 Intro & Intermediate Machine Learning (Kaggle Learn — free)", topics: ["Scikit-learn — end-to-end ML pipelines"] },
+      { title: "Machine Learning Fundamentals", weeks: 3, items: [
+        { label: "📚 Machine Learning Specialization (Coursera — Andrew Ng / DeepLearning.AI)", cost: "medium", topics: ["Supervised vs unsupervised learning", "Classification, clustering, anomaly detection", "Evaluation — precision, recall, F1, ROC curves"] },
       ]},
-      { title: "AI Safety, Ethics & Governance", items: [
-        { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", topics: ["AI alignment concepts — goal misgeneralisation, reward hacking", "Bias and fairness in AI systems", "EU AI Act — risk tiers, prohibited uses, compliance obligations", "UK AI regulation landscape and ethics frameworks", "Responsible AI deployment — transparency, explainability, accountability"] },
-        { label: "Model cards and datasheets for datasets", topics: [] },
-        { label: "Conducting a Data Protection Impact Assessment (DPIA) for AI", topics: [] },
+      { title: "AI Safety, Ethics & Governance", weeks: 1, items: [
+        { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", cost: "free", topics: ["AI alignment concepts — goal misgeneralisation, reward hacking", "Bias and fairness in AI systems", "EU AI Act — risk tiers, prohibited uses, compliance obligations", "UK AI regulation landscape and ethics frameworks", "Responsible AI deployment — transparency, explainability, accountability"] },
+        { label: "Model cards and datasheets for datasets", cost: null, topics: [] },
+        { label: "Conducting a Data Protection Impact Assessment (DPIA) for AI", cost: null, topics: [] },
       ]},
-      { title: "Security & Adversarial AI", items: [
-        { label: "📚 Red Teaming LLM Applications (DeepLearning.AI — free)", topics: ["Prompt injection attacks and mitigation", "AI red-teaming concepts"] },
-        { label: "📚 AI Safety Fundamentals (BlueDot Impact — free)", topics: ["Bias and fairness in AI systems", "EU AI Act, UK regulation, ethics frameworks"] },
+      { title: "Security & Adversarial AI", weeks: 1, items: [
+        { label: "📚 Red Teaming LLM Applications (DeepLearning.AI — free)", cost: "free", topics: ["Prompt injection attacks and mitigation", "AI red-teaming concepts"] },
       ]},
-      { title: "Power BI & Data Visualisation for Stakeholders", items: [
-        { label: "Power BI Desktop — awareness level (Phase 4/5)", topics: ["Building dashboards and reports for non-technical stakeholders", "Connecting to data sources — SQL, Excel, APIs", "DAX basics — calculated columns and measures", "Publishing to Power BI Service and sharing reports"] },
-        { label: "Power BI as a bridge to enterprise platforms", topics: ["Conceptual overlap with Palantir Foundry's Workshop layer — dashboards driven by ontology data", "Conceptual overlap with Quantexa's visualisation and decision intelligence layers", "Pattern to learn: build in Power BI first, then map concepts to Foundry/Quantexa when encountered in a role"] },
+      { title: "Power BI & Data Visualisation for Stakeholders", weeks: 1, items: [
+        { label: "Power BI Desktop — awareness level (Phase 4/5)", cost: null, topics: ["Building dashboards and reports for non-technical stakeholders", "Connecting to data sources — SQL, Excel, APIs", "DAX basics — calculated columns and measures", "Publishing to Power BI Service and sharing reports"] },
+        { label: "Power BI as a bridge to enterprise platforms", cost: null, topics: ["Conceptual overlap with Palantir Foundry's Workshop layer — dashboards driven by ontology data", "Conceptual overlap with Quantexa's visualisation and decision intelligence layers", "Pattern to learn: build in Power BI first, then map concepts to Foundry/Quantexa when encountered in a role"] },
       ]},
-      { title: "Production AI Systems", items: [
-        { label: "📚 Learn Docker (Boot.dev — free to start)", topics: ["Docker for AI deployment — containerising FastAPI + LLM services, docker-compose for local dev"] },
-        { label: "Cost & latency optimisation — token budgeting, batching, async calls", topics: [] },
-        { label: "Caching strategies — semantic caching, prompt caching, response caching", topics: [] },
-        { label: "Streaming responses — SSE, chunked output, progressive UI updates", topics: [] },
-        { label: "Model routing — task-based routing, cost-tier routing, fallback chains", topics: [] },
-        { label: "Model monitoring and logging post-deployment", topics: ["Structured logging — request/response capture, latency, token usage", "Drift detection — quality regression and input distribution shifts", "Alerting — failure rate thresholds, latency SLAs", "Observability tools — LangSmith, Evidently AI, custom dashboards"] },
+      { title: "Production AI Systems", weeks: 3, items: [
+        { label: "📚 Learn Docker (Boot.dev — free to start)", cost: "free", topics: ["Docker for AI deployment — containerising FastAPI + LLM services, docker-compose for local dev"] },
+        { label: "Cost & latency optimisation — token budgeting, batching, async calls", cost: null, topics: [] },
+        { label: "Caching strategies — semantic caching, prompt caching, response caching", cost: null, topics: [] },
+        { label: "Streaming responses — SSE, chunked output, progressive UI updates", cost: null, topics: [] },
+        { label: "Model routing — task-based routing, cost-tier routing, fallback chains", cost: null, topics: [] },
+        { label: "Model monitoring and logging post-deployment", cost: null, topics: ["Structured logging — request/response capture, latency, token usage", "Drift detection — quality regression and input distribution shifts", "Alerting — failure rate thresholds, latency SLAs", "Observability tools — LangSmith, Evidently AI, custom dashboards"] },
       ]},
     ],
   },
   {
     id: "phase5", label: "Phase 5", title: "Portfolio & Job Readiness", months: "Months 15–18", color: "#1e3d6b",
+    milestone: "Pass AZ-900 and AI-102 certification exams, make one merged open-source contribution, and publish a portfolio landing page linking all Phase 2–4 projects with writeups explaining the architectural decisions made.",
+    roleRelevance: "Azure certifications (AZ-900, AI-102) are explicitly listed in Palantir, Quantexa, and BAE Systems job specs. A structured project portfolio with deployment evidence is the primary differentiator in Palantir Deployment Strategist interview panels.",
     sections: [
-      { title: "Certifications", items: [
-        { label: "📚 AZ-900 Azure Fundamentals (Microsoft Learn — free)", topics: ["Foundation for Azure AI Engineer and Developer paths"] },
-        { label: "📚 AI-102 Azure AI Engineer Associate (Microsoft Learn — free)", topics: ["Azure AI Engineer Associate (AI-102) certification"] },
-        { label: "Azure Developer Associate (AZ-204)", topics: [] },
-        { label: "📚 Kaggle Certifications (Kaggle Learn — free)", topics: ["Python, Pandas, ML certificates"] },
-        { label: "DeepLearning.AI Specialisation certificates (on completion)", topics: [] },
+      { title: "Certifications", weeks: 4, items: [
+        { label: "📚 AZ-900 Azure Fundamentals (Microsoft Learn — free)", cost: "high", topics: ["Foundation for Azure AI Engineer and Developer paths"] },
+        { label: "📚 AI-102 Azure AI Engineer Associate (Microsoft Learn — free)", cost: "high", topics: ["Azure AI Engineer Associate (AI-102) certification"] },
+        { label: "Azure Developer Associate (AZ-204)", cost: "high", topics: [] },
+        { label: "📚 Kaggle Certifications (Kaggle Learn — free)", cost: "free", topics: ["Python, Pandas, ML certificates"] },
+        { label: "DeepLearning.AI Specialisation certificates (on completion)", cost: "free", topics: [] },
       ]},
-      { title: "Open Source & Community", items: [
-        { label: "Contribute to LangChain or related project", topics: [] },
-        { label: "Complete a Kaggle competition", topics: [] },
-        { label: "Clean GitHub profile — good READMEs, consistent commits", topics: [] },
-        { label: "Attend AI UK or PyData London", topics: [] },
+      { title: "Open Source & Community", weeks: 3, items: [
+        { label: "Contribute to LangChain or related project", cost: null, topics: [] },
+        { label: "Complete a Kaggle competition", cost: null, topics: [] },
+        { label: "Clean GitHub profile — good READMEs, consistent commits", cost: null, topics: [] },
+        { label: "Attend AI UK or PyData London", cost: null, topics: [] },
       ]},
-      { title: "Interview Preparation", items: [
-        { label: "System design — RAG pipelines, agent systems at scale", topics: [] },
-        { label: "LLM questions — RAG vs fine-tuning, hallucination, safety", topics: [] },
-        { label: "Python coding — LeetCode easy/medium", topics: [] },
-        { label: "Domain Q&A — AI ethics, GDPR, DPIA, bias in policing AI", topics: [] },
+      { title: "Interview Preparation", weeks: 3, items: [
+        { label: "System design — RAG pipelines, agent systems at scale", cost: null, topics: [] },
+        { label: "LLM questions — RAG vs fine-tuning, hallucination, safety", cost: null, topics: [] },
+        { label: "Python coding — LeetCode easy/medium", cost: null, topics: [] },
+        { label: "Domain Q&A — AI ethics, GDPR, DPIA, bias in policing AI", cost: null, topics: [] },
       ]},
-      { title: "Project Management", items: [
-        { label: "📚 Google Project Management Certificate (Coursera)", topics: ["Agile and Scrum fundamentals — sprints, standups, retros", "Kanban methodology and WIP limits", "Project scoping — requirements, timelines, risk management", "Stakeholder communication and reporting"] },
-        { label: "📚 Agile with Atlassian Jira (Coursera — free)", topics: ["Tools — Jira, Trello, or GitHub Projects"] },
+      { title: "Project Management", weeks: 2, items: [
+        { label: "📚 Google Project Management Certificate (Coursera)", cost: "medium", topics: ["Agile and Scrum fundamentals — sprints, standups, retros", "Kanban methodology and WIP limits", "Project scoping — requirements, timelines, risk management", "Stakeholder communication and reporting"] },
+        { label: "📚 Agile with Atlassian Jira (Coursera — free)", cost: "free", topics: ["Tools — Jira, Trello, or GitHub Projects"] },
       ]},
     ],
   },
@@ -300,6 +308,29 @@ const STATUS_STYLE = {
   "complete":     { bg: "#0d2b1e", color: "#4caf82", label: "Complete" },
 };
 
+const COST_STYLE = {
+  free:   { label: "free",    color: "#4caf82", bg: "#0d2b1e" },
+  low:    { label: "~£12",    color: "#5ba3e0", bg: "#0d2540" },
+  medium: { label: "~£35/mo", color: "#e0a030", bg: "#2a1e05" },
+  high:   { label: "~£150+",  color: "#e05a5a", bg: "#2a0d0d" },
+};
+
+const TOPIC_STATUS_CYCLE = { "not-started": "in-progress", "in-progress": "complete", "complete": "not-started" };
+const TOPIC_STATUS_DOT = {
+  "not-started": { color: "#333",    title: "Not Started" },
+  "in-progress": { color: "#e0a030", title: "In Progress" },
+  "complete":    { color: "#4caf82", title: "Complete"    },
+};
+
+const SECTION_DEPS = {
+  "LangChain":                          { requires: ["Python"] },
+  "API Usage":                          { requires: ["Python"] },
+  "Transformer Architecture & Attention": { requires: ["Applied Linear Algebra", "Applied Probability & Statistics"] },
+  "Classical ML Fundamentals":          { requires: ["Applied Probability & Statistics"] },
+  "Machine Learning Fundamentals":      { requires: ["Applied Probability & Statistics"] },
+  "Production AI Systems":              { requires: ["Deployment & DevOps"] },
+};
+
 function ProgressBar({ pct, color }) {
   return (
     <div style={{ background: "#222", borderRadius: 99, height: 6, overflow: "hidden", flex: 1 }}>
@@ -329,6 +360,7 @@ function Tick({ done, color }) {
 export default function App() {
   const [checked, setChecked] = useState({});
   const [projStatus, setProjStatus] = useState({});
+  const [topicStatus, setTopicStatus] = useState({});
   const [tab, setTab] = useState("learning");
   const [openPhase, setOpenPhase] = useState("phase1");
   const [openSection, setOpenSection] = useState(null);
@@ -341,28 +373,36 @@ export default function App() {
         const parsed = JSON.parse(raw);
         setChecked(parsed.checked || {});
         setProjStatus(parsed.projStatus || {});
+        setTopicStatus(parsed.topicStatus || {});
       }
     } catch (e) {}
     setLoaded(true);
   }, []);
 
-  const persist = useCallback(function(c, p) {
+  const persist = useCallback(function(c, p, t) {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ checked: c, projStatus: p }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ checked: c, projStatus: p, topicStatus: t }));
     } catch (e) {}
   }, []);
 
   function toggleItem(key) {
     const next = Object.assign({}, checked, { [key]: !checked[key] });
     setChecked(next);
-    persist(next, projStatus);
+    persist(next, projStatus, topicStatus);
+  }
+
+  function cycleTopicStatus(key) {
+    var current = topicStatus[key] || "not-started";
+    var next = Object.assign({}, topicStatus, { [key]: TOPIC_STATUS_CYCLE[current] });
+    setTopicStatus(next);
+    persist(checked, projStatus, next);
   }
 
   function cycleProject(id) {
     const current = projStatus[id] || PROJECTS.find(function(p) { return p.id === id; }).initStatus;
     const next = Object.assign({}, projStatus, { [id]: STATUS_CYCLE[current] });
     setProjStatus(next);
-    persist(checked, next);
+    persist(checked, next, topicStatus);
   }
 
   function phaseProgress(phase) {
@@ -374,6 +414,21 @@ export default function App() {
     });
     var done = keys.filter(function(k) { return checked[k]; }).length;
     return { done: done, total: keys.length, pct: keys.length ? Math.round(done / keys.length * 100) : 0 };
+  }
+
+  function phaseTopicProgress(phase) {
+    var total = 0;
+    var complete = 0;
+    phase.sections.forEach(function(s) {
+      s.items.forEach(function(item, i) {
+        (item.topics || []).forEach(function(_, ti) {
+          total++;
+          var k = phase.id + "-" + s.title + "-" + i + "-t" + ti;
+          if ((topicStatus[k] || "not-started") === "complete") complete++;
+        });
+      });
+    });
+    return { complete: complete, total: total };
   }
 
   var totalItems = 0;
@@ -430,6 +485,7 @@ export default function App() {
 
         {tab === "learning" && PHASES.map(function(phase) {
           var prog = phaseProgress(phase);
+          var topicProg = phaseTopicProgress(phase);
           var isPhaseOpen = openPhase === phase.id;
           return (
             <div key={phase.id} style={{ marginBottom: 10, border: "1px solid #1c1c1c", borderRadius: 12, overflow: "hidden", background: "#0f0f0f" }}>
@@ -443,26 +499,55 @@ export default function App() {
                     <span style={{ fontWeight: 600, fontSize: 14, color: "#fff" }}>{phase.title}</span>
                     <span style={{ fontSize: 11, color: "#444" }}>{phase.months}</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
                     <ProgressBar pct={prog.pct} color={phase.color} />
-                    <span style={{ fontSize: 10, color: "#444", fontFamily: "monospace", whiteSpace: "nowrap" }}>{prog.done}/{prog.total}</span>
+                    <span style={{ fontSize: 10, color: "#444", fontFamily: "monospace", whiteSpace: "nowrap" }}>{prog.done}/{prog.total} resources</span>
                   </div>
+                  {topicProg.total > 0 && (
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: phase.roleRelevance ? 6 : 0 }}>
+                      <div style={{ display: "flex", gap: 2 }}>
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: topicProg.complete > 0 ? "#4caf82" : "#222", display: "inline-block" }} />
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#222", display: "inline-block" }} />
+                        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#222", display: "inline-block" }} />
+                      </div>
+                      <span style={{ fontSize: 10, color: topicProg.complete > 0 ? "#4caf82" : "#383838", fontFamily: "monospace" }}>{topicProg.complete}/{topicProg.total} topics complete</span>
+                    </div>
+                  )}
+                  {phase.roleRelevance && (
+                    <div style={{ fontSize: 11, color: "#484848", lineHeight: 1.5 }}>{phase.roleRelevance}</div>
+                  )}
                 </div>
                 <span style={{ color: "#333", fontSize: 18, display: "inline-block", transform: isPhaseOpen ? "rotate(90deg)" : "none", transition: "transform 0.2s" }}>›</span>
               </div>
 
               {isPhaseOpen && (
                 <div style={{ borderTop: "1px solid #181818" }}>
+                  {phase.milestone && (
+                    <div style={{ margin: "14px 18px 0", padding: "11px 14px", background: "#0c0c0c", border: "1px solid #222", borderLeft: "3px solid " + phase.color, borderRadius: 8 }}>
+                      <div style={{ fontSize: 9, letterSpacing: 2, color: phase.color, fontFamily: "monospace", marginBottom: 5 }}>PHASE MILESTONE</div>
+                      <div style={{ fontSize: 12, color: "#666", lineHeight: 1.6 }}>{phase.milestone}</div>
+                    </div>
+                  )}
                   {phase.sections.map(function(section) {
                     var sKey = phase.id + "-" + section.title;
                     var isSectionOpen = openSection === sKey;
                     var secDone = section.items.filter(function(_, i) { return checked[phase.id + "-" + section.title + "-" + i]; }).length;
                     return (
                       <div key={section.title} style={{ borderBottom: "1px solid #141414" }}>
-                        <div onClick={function() { setOpenSection(isSectionOpen ? null : sKey); }} style={{ padding: "11px 18px 11px 26px", cursor: "pointer", display: "flex", alignItems: "center", gap: 10, background: isSectionOpen ? "#121212" : "transparent" }}>
-                          <span style={{ flex: 1, fontSize: 13, color: "#bbb", fontWeight: 600 }}>{section.title}</span>
-                          <span style={{ fontSize: 10, fontFamily: "monospace", color: secDone === section.items.length ? "#4caf82" : "#444" }}>{secDone}/{section.items.length}</span>
-                          <span style={{ color: "#2a2a2a", fontSize: 14, display: "inline-block", transform: isSectionOpen ? "rotate(90deg)" : "none", transition: "transform 0.2s" }}>›</span>
+                        <div onClick={function() { setOpenSection(isSectionOpen ? null : sKey); }} style={{ padding: "11px 18px 11px 26px", cursor: "pointer", background: isSectionOpen ? "#121212" : "transparent" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                            <span style={{ flex: 1, fontSize: 13, color: "#bbb", fontWeight: 600 }}>{section.title}</span>
+                            {section.weeks && (
+                              <span style={{ fontSize: 10, fontFamily: "monospace", color: "#383838", whiteSpace: "nowrap" }}>{section.weeks}w</span>
+                            )}
+                            <span style={{ fontSize: 10, fontFamily: "monospace", color: secDone === section.items.length ? "#4caf82" : "#444" }}>{secDone}/{section.items.length}</span>
+                            <span style={{ color: "#2a2a2a", fontSize: 14, display: "inline-block", transform: isSectionOpen ? "rotate(90deg)" : "none", transition: "transform 0.2s" }}>›</span>
+                          </div>
+                          {SECTION_DEPS[section.title] && (
+                            <div style={{ marginTop: 3, fontSize: 10, color: "#383838", fontFamily: "monospace" }}>
+                              ← requires: {SECTION_DEPS[section.title].requires.join(", ")}
+                            </div>
+                          )}
                         </div>
                         {isSectionOpen && (
                           <div style={{ padding: "2px 18px 10px 26px" }}>
@@ -471,22 +556,33 @@ export default function App() {
                               var done = !!checked[key];
                               var hasTopics = item.topics && item.topics.length > 0;
                               var url = COURSE_URLS[item.label] || null;
+                              var costStyle = item.cost ? COST_STYLE[item.cost] : null;
                               return (
                                 <div key={i} style={{ borderBottom: i < section.items.length - 1 ? "1px solid #141414" : "none" }}>
                                   <div onClick={function() { toggleItem(key); }} style={{ display: "flex", alignItems: "flex-start", gap: 11, padding: "9px 0 6px", cursor: "pointer" }}>
                                     <div style={{ paddingTop: 1 }}><Tick done={done} color={phase.color} /></div>
                                     <span style={{ fontSize: 13, lineHeight: 1.5, color: done ? "#3a3a3a" : "#aaa", textDecoration: done ? "line-through" : "none", transition: "all 0.2s", flex: 1 }}>{item.label}</span>
+                                    {costStyle && (
+                                      <span style={{ flexShrink: 0, alignSelf: "center", fontSize: 10, fontFamily: "monospace", padding: "2px 6px", borderRadius: 99, background: done ? "#1a1a1a" : costStyle.bg, color: done ? "#2a2a2a" : costStyle.color, border: "1px solid " + (done ? "#222" : costStyle.color + "40"), whiteSpace: "nowrap", transition: "all 0.2s" }}>{costStyle.label}</span>
+                                    )}
                                     {url && (
-                                      <a href={url} target="_blank" rel="noreferrer" onClick={function(e) { e.stopPropagation(); }} title="Open course" style={{ flexShrink: 0, alignSelf: "center", marginLeft: 6, color: done ? "#2a2a2a" : "#3a6a9a", fontSize: 15, lineHeight: 1, textDecoration: "none", transition: "color 0.2s" }}>↗</a>
+                                      <a href={url} target="_blank" rel="noreferrer" onClick={function(e) { e.stopPropagation(); }} title="Open course" style={{ flexShrink: 0, alignSelf: "center", marginLeft: 2, color: done ? "#2a2a2a" : "#3a6a9a", fontSize: 15, lineHeight: 1, textDecoration: "none", transition: "color 0.2s" }}>↗</a>
                                     )}
                                   </div>
                                   {hasTopics && (
                                     <div style={{ paddingLeft: 33, paddingBottom: 8 }}>
                                       {item.topics.map(function(topic, ti) {
+                                        var tk = key + "-t" + ti;
+                                        var ts = topicStatus[tk] || "not-started";
+                                        var dot = TOPIC_STATUS_DOT[ts];
                                         return (
-                                          <div key={ti} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "2px 0" }}>
-                                            <span style={{ color: "#2a2a2a", flexShrink: 0, fontSize: 14, lineHeight: 1.4 }}>·</span>
-                                            <span style={{ fontSize: 12, color: done ? "#2a2a2a" : "#4a4a4a", lineHeight: 1.5 }}>{topic}</span>
+                                          <div key={ti} style={{ display: "flex", alignItems: "flex-start", gap: 8, padding: "3px 0" }}>
+                                            <button
+                                              onClick={function(e) { e.stopPropagation(); cycleTopicStatus(tk); }}
+                                              title={dot.title + " — click to change"}
+                                              style={{ flexShrink: 0, marginTop: 4, width: 8, height: 8, borderRadius: "50%", background: done ? "#252525" : dot.color, border: "none", padding: 0, cursor: "pointer", transition: "background 0.2s" }}
+                                            />
+                                            <span style={{ fontSize: 12, color: done ? "#2a2a2a" : ts === "complete" ? "#4a4a4a" : ts === "in-progress" ? "#888" : "#4a4a4a", lineHeight: 1.5, textDecoration: ts === "complete" && !done ? "line-through" : "none", transition: "all 0.2s" }}>{topic}</span>
                                           </div>
                                         );
                                       })}
